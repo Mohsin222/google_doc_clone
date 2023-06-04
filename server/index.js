@@ -1,15 +1,21 @@
 const express =require('express')
 const mongoose = require('mongoose')
-const PORT =process.env.port || 8000
+const cors= require('cors')
+const PORT =process.env.port || 3000
 
 
 const app = express()
+app.use(cors())
 app.use(express.json());
 const DB="mongodb+srv://mohsin:123@cluster0.xgm3y.mongodb.net/google_docs_clone";
 mongoose.connect(DB).then(()=>{
     console.log('Connection Success')
 }).catch((error)=>{
     console.log(error)
+})
+
+app.get('/',(req,res)=>{
+    res.send('aaaaaa')
 })
 
 
