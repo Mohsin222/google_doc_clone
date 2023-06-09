@@ -18,6 +18,11 @@ const userSchema = mongoose.Schema({
    
     default:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
   },
+
+  token:{
+    type:String,
+    default:null
+  }
 });
 
 const User = mongoose.model("User", userSchema);

@@ -16,7 +16,7 @@ class MainPage extends ConsumerWidget {
       body: Center(
         child: Column(children: [
               if (user?.email != null)
-              Text(user!.email),
+              Text(user!.token.toString()),
         ]),
       ),
     );
