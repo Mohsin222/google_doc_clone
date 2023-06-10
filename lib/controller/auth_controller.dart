@@ -53,7 +53,7 @@ class AuthController extends StateNotifier<bool> {
           _localStorageRepository.setToken(userModel.token.toString());
           // Navigator.pushReplacement(context,
           //     MaterialPageRoute(builder: (context) => const MainPage()));
-   Routemaster.of(context).replace('/mainPage');
+  //  Routemaster.of(context).push('/mainPage');
 
           return UserModel.fromMap(data['data']);
         });
@@ -75,10 +75,11 @@ class AuthController extends StateNotifier<bool> {
     );
 
     try {
+  
       String? token = await _localStorageRepository.getToken();
 
 
-      print(token);
+
       if (token != null) {
         var res = await _authApiClass.getUserData(token);
 
@@ -111,7 +112,14 @@ class AuthController extends StateNotifier<bool> {
       );
 
     }
-    return error;
+   
+  }
+
+
+    signOut() async {
+      _localStorageRepository.setToken('');
+ 
+   
   }
 
 
@@ -134,7 +142,7 @@ class AuthController extends StateNotifier<bool> {
 
         //   return UserModel.fromMap(data['data']);
         // });
-         Routemaster.of(context).replace('/mainPage');
+        //  Routemaster.of(context).replace('/mainPage');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(user.body.toString(), style: TextStyle())));

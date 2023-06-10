@@ -30,7 +30,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    // getUserData();
+    getUserData();
   }
 
   void getUserData() async {
@@ -59,8 +59,11 @@ class _MyAppState extends ConsumerState<MyApp> {
       routerDelegate: RoutemasterDelegate(routesBuilder: (context){
         // final user = ref.watch(userProvider);
         // if(user !=null && user.token!.isNotEmpty){}
-
-        return loggedInRoute;
+  final user = ref.watch(userProvider);
+        if (user != null && user.token!.isNotEmpty && user.token! !='') {
+          return loggedInRoute;
+        }
+   return loggedOutRoute;
       }),
 
       routeInformationParser: const RoutemasterParser(),

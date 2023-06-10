@@ -86,9 +86,19 @@ exports.loginUser=async(req,res)=>{
  
 
    exports.getUserData=  async (req, res) => {
-    const user = await User.findById(req.user);
+    // const user = await User.findById(req.user);
 
-    user.token =req.token
-    res.json({ user, token: req.token });
+    // user.token =req.token
+    // res.json({ user, token: req.token });
+
+
+    try {
+      const user = await User.findById(req.user);
+    
+      user.token =req.token
+      res.json({success:true, data:user, token: req.token });
+    } catch (error) {
+      res.json({success:false, data:user, token: req.token });
+    }
   }
 

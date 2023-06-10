@@ -5,6 +5,8 @@ import 'package:googledoc_clone/model/user_model.dart';
 import 'package:googledoc_clone/local_storage/local_storage_repositary.dart';
 import 'package:http/http.dart';
 
+import '../constant.dart';
+
 final authApiClassProvider = Provider((ref) {
   return AuthApiClass(
       client: Client(),
@@ -58,19 +60,20 @@ class AuthApiClass {
 
   //get user data if token is present
   Future<Response?> getUserData(String token) async {
+    print(token);
     try {
       Response res = await _client.get(
         Uri.parse('http://localhost:3000/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': token,
+          'x-auth-token':token,
         },
       );
-
+print(res.statusCode);
       return res;
     } catch (e) {
       // ErrorModel errorModel=ErrorModel(error: e.toString(), data: '');
-      print(e.toString());
+      print('ERRRRRRRRRRRRRRRRRRRRRRR');
     }
   }
 

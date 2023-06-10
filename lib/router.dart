@@ -9,11 +9,11 @@ final loggedOutRoute= RouteMap(routes: {
 
 
 final loggedInRoute= RouteMap(routes: {
-  '/':(route) =>  MaterialPage(child:  LoginScreen()),
+  '/':(route) =>  MaterialPage(child:  MainPage()),
 
-    '/mainPage': (route) => MaterialPage(
-        child: MainPage(
+    // '/mainPage': (route) => const MaterialPage(
+    //     child: MainPage(
 
-        ),
-      ),
+    //     ),
+    //   ),
 });
