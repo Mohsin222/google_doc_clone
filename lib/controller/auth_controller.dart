@@ -46,11 +46,14 @@ class AuthController extends StateNotifier<bool> {
       state = false;
 
       if (user!.statusCode == 200) {
+
+        print(user.statusCode);
         _ref.read(userProvider.notifier).update((state) {
           final data = jsonDecode(user.body);
           var userModel = UserModel.fromMap(data['data']);
 
           _localStorageRepository.setToken(userModel.token.toString());
+
           // Navigator.pushReplacement(context,
           //     MaterialPageRoute(builder: (context) => const MainPage()));
   //  Routemaster.of(context).push('/mainPage');

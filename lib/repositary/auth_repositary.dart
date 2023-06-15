@@ -53,8 +53,8 @@ class AuthApiClass {
 
       return res;
     } catch (e) {
-      // ErrorModel errorModel=ErrorModel(error: e.toString(), data: '');
-// print(e.toString());
+      ErrorModel errorModel=ErrorModel(error: e.toString(), data: '');
+print(e.toString());
     }
   }
 
@@ -66,14 +66,18 @@ class AuthApiClass {
         Uri.parse('http://localhost:3000/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token':token,
+          // 'x-auth-token':token,
+          // 'Bearer':token
+               'Authorization': 'Bearer $token',
         },
       );
+          print('Token : ${token}');
+
 print(res.statusCode);
       return res;
     } catch (e) {
       // ErrorModel errorModel=ErrorModel(error: e.toString(), data: '');
-      print('ERRRRRRRRRRRRRRRRRRRRRRR');
+      print(e);
     }
   }
 

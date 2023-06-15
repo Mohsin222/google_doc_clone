@@ -24,7 +24,7 @@ const authRouter = require('./routes/auth');
 app.use('/auth',authRouter);
 
 const documentRoutes = require('./routes/documents');
-app.use('/documents',documentRoutes);
+app.use('/document',documentRoutes);
 app.listen(PORT,"0.0.0.0",()=>{
 console.log(`Server is running onaa ${PORT}`)
 })

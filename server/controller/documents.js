@@ -1,0 +1,1 @@
+const Documents = require("../model/documents");

@@ -20,7 +20,10 @@ exports.createUser =async(req,res)=>{
     const findEmail =await User.findOne({email:email})
     if(findEmail)
     return res.status(200).json({success:true, message:"Email already registered"})
-    const token = jwt.sign({id:userData._id}, "passwordKey"
+    const token = jwt.sign({id:userData._id}, "passwordKey",
+    secret, {
+      expiresIn: "1hr"
+  },
       // expiresIn: "2h",
     )
 
@@ -98,7 +101,7 @@ exports.loginUser=async(req,res)=>{
       user.token =req.token
       res.json({success:true, data:user, token: req.token });
     } catch (error) {
-      res.json({success:false, data:user, token: req.token });
+      res.json({success:false, data:error,  });
     }
   }
 
