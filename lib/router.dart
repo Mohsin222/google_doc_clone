@@ -13,7 +13,7 @@ final loggedOutRoute= RouteMap(routes: {
 final loggedInRoute= RouteMap(routes: {
   '/':(route) =>  MaterialPage(child:  MainPage()),
 
-    '/documentPage': (route) => const MaterialPage(
+    '/documentPage': (route) =>  MaterialPage(
         child: DocumentListScreen(
 
         ),
