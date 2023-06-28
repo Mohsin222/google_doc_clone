@@ -25,7 +25,7 @@ class MainPage extends ConsumerWidget {
     final navigator = Routemaster.of(context);
     final snackbar = ScaffoldMessenger.of(context);
 
-    ref.read(documentontrollerProvider.notifier).createDocuments();
+    // ref.read(documentontrollerProvider.notifier).createDocuments();
 
     // if (errorModel.data != null) {
     //   navigator.push('/document/${errorModel.data.id}');
@@ -41,18 +41,24 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-       final docsProvider = ref.watch(documentListProvider) ?? [];
+
+      //  final docsProvider = ref.watch(documentListProvider) ?? [];
    final user = ref.watch(userProvider);
-   ref.read(documentontrollerProvider.notifier).getDocuments(ref );
+           ref.read(documentontrollerProvider.notifier).getDocuments(ref );
     return  Scaffold(
       appBar: AppBar(title: Text('a'),
       
       actions: [
            IconButton(onPressed: (){
-Navigator.push(context, MaterialPageRoute(builder: (context)=>DocumentListScreen()));
+        
+Future.delayed(Duration(seconds: 0),(){
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>DocumentListScreen()));
+});
         }, icon:const Icon(Icons.create)),
         IconButton(onPressed: (){
-     createDocument(context, ref);
+    //  createDocument(context, ref);
+    
+    Routemaster.of(context).push('/createDocument');
         }, icon:const Icon(Icons.create)),
 
         
@@ -73,33 +79,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=>DocumentListScreen
       //   ]),
       // ),
 
-      body: FutureBuilder(
-        // future: ref.read(documentontrollerProvider.notifier).getDocuments(ref ),
-
-        builder: (context, AsyncSnapshot snapshot) {
-        
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Loader();
-          }
-          snapshot.data ?? 0;
-            // final data = snapshot.data! ?? 0;
-          return ListView.builder(
-            // itemCount: snapshot.data!.data.length,
-            itemCount: 0,
-           
-            itemBuilder: (context,index){
-              // final   ds = snapshot.data;
-                        // DocumentModel document = snapshot.data!.data[index];
-// var ddd =ref.watch(documentListProv);
-              
-              var data = snapshot.data;
-// Data docList = dataP  
-
-// return Text(documentModel.title  ==''? 'aa':documentModel.title);
-return Text(data[index].toString());
-          });
-        },
-      ),
+      
     );
   }
 }

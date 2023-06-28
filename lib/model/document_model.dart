@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/src/consumer.dart';
+
 class DocumentModel {
   bool? success;
   List<Data>? data;
@@ -22,6 +24,8 @@ class DocumentModel {
     }
     return data;
   }
+
+  void getDocument(WidgetRef ref) {}
 }
 
 class Data {
@@ -29,7 +33,7 @@ class Data {
   String? uid;
   int? createdAt;
   String? title;
-  List<Null>? content;
+  List? content;
   int? iV;
 
   Data({this.sId, this.uid, this.createdAt, this.title, this.content, this.iV});
@@ -39,12 +43,12 @@ class Data {
     uid = json['uid'];
     createdAt = json['createdAt'];
     title = json['title'];
-    // if (json['content'] != null) {
-    //   content = <Null>[];
-    //   json['content'].forEach((v) {
-    //     content!.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['content'] != null) {
+      content = [];
+      json['content'].forEach((v) {
+        content!.add( v);
+      });
+    }
     // iV = json['__v'];
   }
 

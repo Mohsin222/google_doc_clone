@@ -38,6 +38,8 @@ class AuthController extends StateNotifier<bool> {
         _ref = ref,
         _localStorageRepository = localStorageRepository,
         super(false);
+        
+          get documentontrollerProvider => null;
 
   void loginUser(BuildContext context, String email, String password) async {
     try {
@@ -53,6 +55,9 @@ class AuthController extends StateNotifier<bool> {
           var userModel = UserModel.fromMap(data['data']);
 
           _localStorageRepository.setToken(userModel.token.toString());
+
+          //me called all docis
+          documentontrollerProvider.getDocumens();
 
           // Navigator.pushReplacement(context,
           //     MaterialPageRoute(builder: (context) => const MainPage()));

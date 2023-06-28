@@ -7,7 +7,7 @@ import 'package:googledoc_clone/controller/auth_controller.dart';
 import 'package:googledoc_clone/model/error_model.dart';
 import 'package:googledoc_clone/router.dart';
 
-import 'package:googledoc_clone/screens/login_screen.dart';
+import 'package:googledoc_clone/screens/auth/login_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
 void main() {

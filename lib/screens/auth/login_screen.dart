@@ -11,7 +11,7 @@ class LoginScreen extends ConsumerWidget {
 
 
 
- TextEditingController _emailController = TextEditingController(text: "bb@gmail.com");
+ TextEditingController _emailController = TextEditingController(text: "ee@gmail.com");
 
  TextEditingController _passwordController =TextEditingController(text: '12345');
 

@@ -21,9 +21,9 @@ exports.createUser =async(req,res)=>{
     if(findEmail)
     return res.status(200).json({success:true, message:"Email already registered"})
     const token = jwt.sign({id:userData._id}, "passwordKey",
-    secret, {
-      expiresIn: "1hr"
-  },
+  //   secret, {
+  //     expiresIn: "1hr"
+  // },
       // expiresIn: "2h",
     )
 

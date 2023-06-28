@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googledoc_clone/colors.dart';
 import 'package:googledoc_clone/controller/documentController.dart';
+import 'package:googledoc_clone/repositary/socket_repositary.dart';
+import 'package:googledoc_clone/screens/auth/down.dart';
 import 'package:routemaster/routemaster.dart';
-
+import 'package:flutter_quill/flutter_quill.dart' as quill;
 class DocumentListScreen extends ConsumerStatefulWidget {
 
 
@@ -22,21 +26,66 @@ void navigateToDocument(BuildContext context, String documentId){
 
 TextEditingController titleController =TextEditingController(text: 'Untitled Documents');
 
+SocketRepositary socketRepositary = SocketRepositary();
+
+
+
+
 @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     titleController.dispose();
   }
+quill.QuillController _controller = quill.QuillController.basic();
+  fetchDocument()async{
+     final docData =   ref.watch(documentListProvider)!.data;
 
+
+    //      if (docData != null) {
+    //   titleController.text =d
+    //   _controller = quill.QuillController(
+    //     document: errorModel!.data.content.isEmpty
+    //         ? quill.Document()
+    //         : quill.Document.fromDelta(
+    //             quill.Delta.fromJson(errorModel!.data.content),
+    //           ),
+    //     selection: const TextSelection.collapsed(offset: 0),
+    //   );
+    //   setState(() {});
+    // }
+
+   
+  }
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+  }
   @override
   Widget build(BuildContext context) {
- final docData =   ref.watch(documentListProvider)!.data;
+ 
+
+
+
+ 
+      var docData =   ref.watch(documentListProvider)!.data ;
+       
+      print(docData![0].content!);
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         elevation: 0,
+        leading: IconButton(icon: Icon(Icons.back_hand),onPressed: (){
+          Navigator.pop(context);
+        }),
         actions: [
+          IconButton(onPressed: (){
+            setState(() {
+              
+            });
+          }, icon: Text('aa')),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.lock,size: 16,), label: Text('Share'),
@@ -72,20 +121,39 @@ TextEditingController titleController =TextEditingController(text: 'Untitled Doc
         child: SizedBox(width: 600,
         
         child: ListView.builder(
-          itemCount: docData!.length,
+          itemCount: docData.length,
           itemBuilder: (context,index){
-      
-      if(docData !=null){
+
+      if(docData.isNotEmpty){
+
+
+
+  
+           _controller = quill.QuillController(
+  document: quill.Document.fromJson(docData[index].content!),
+  selection: TextSelection.collapsed(offset: 0)
+);
+
+
+print(_controller.document.toDelta().toJson());
         return InkWell(
-          onTap: ()=>navigateToDocument(context, docData[index].sId.toString()),
+          // onTap: ()=>navigateToDocument(context, docData[index].sId.toString()),
           child: Card(
             elevation: 10,
             child: Column(
           children: [
-            Text(docData[index].title.toString()),
-            Text(docData[index].createdAt.toString()),
-              Text(docData[index].createdAt.toString()),
-                Text(docData[index].content.toString()),
+            Container(height: 200,
+            child: quill.QuillEditor.basic(
+          controller: _controller,
+          readOnly: true,
+        ),
+      
+            
+            ),
+            // Text(docData[index].title.toString()),
+            // Text(docData[index].createdAt.toString()),
+            //   Text(docData[index].createdAt.toString()),
+            //     Text(docData[index].content.toString()),
           ],
             ),
           ),
